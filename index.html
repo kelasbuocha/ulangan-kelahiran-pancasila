@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran & Ulangan Interaktif - Sejarah Kelahiran Pancasila</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        merah: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            800: '#9f1239',
+                        },
+                        emas: {
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles & Mobile Fine-Tuning */
+        body {
+            font-family: 'Inter', sans-serif;
+            user-select: none; /* Prevent easy copy-pasting */
+            -webkit-user-select: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Custom modal blur */
+        .backdrop-blur-custom {
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-red-200">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-red-800 text-white sticky top-0 z-30 shadow-md">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-400 rounded-full flex items-center justify-center text-red-900 font-bold shadow-inner">
+                    <i class="fa-solid me-0.5 fa-shield-halved text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base md:text-lg leading-tight">Pendidikan Pancasila</h1>
+                    <p class="text-xs text-amber-200 font-medium">Paket B Setara SMP - Bab 1</p>
+                </div>
+            </div>
+            <!-- Dynamic Status Badge -->
+            <div id="nav-status" class="hidden md:flex items-center gap-2 bg-red-900/60 text-xs px-3 py-1.5 rounded-full border border-red-700">
+                <i class="fa-solid fa-book-open text-amber-300"></i>
+                <span>Mode Belajar</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content Wrapper -->
+    <main class="max-w-4xl w-full mx-auto p-4 flex-grow">
+
+        <!-- SCREEN 1: NAVIGATION HUB / DASHBOARD -->
+        <section id="screen-dashboard" class="space-y-6">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-red-700 via-red-800 to-red-900 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden border border-red-600">
+                <div class="absolute -right-6 -bottom-6 text-red-600 opacity-20 pointer-events-none">
+                    <i class="fa-solid fa-monument text-9xl"></i>
+                </div>
+                <div class="relative z-10 space-y-3">
+                    <span class="inline-block bg-amber-400 text-red-950 font-bold text-xs px-3 py-1 rounded-full shadow-sm">
+                        <i class="fa-solid fa-star me-1"></i> Modul Pembelajaran Interaktif
+                    </span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Sejarah Kelahiran Pancasila</h2>
+                    <p class="text-red-100 text-sm leading-relaxed max-w-xl">
+                        Pelajari perjalanan sejarah perumusan dasar negara kita dari era BPUPK, Pidato Sukarno, Panitia Sembilan, hingga Pengesahan 18 Agustus 1945.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Main Menu Buttons -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Learning Menu Button -->
+                <button onclick="switchScreen('screen-materi')" class="group text-left p-5 bg-white rounded-2xl shadow-sm hover:shadow-md border border-slate-200 transition-all flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-book-open-reader text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-lg group-hover:text-red-700 transition-colors">Materi Pembelajaran</h3>
+                            <p class="text-xs text-slate-500 mt-1">4 Sub-Bab Rangkuman Resmi Paket B</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+
+                <!-- Exam Portal Button -->
+                <button onclick="switchScreen('screen-portal-ulangan')" class="group text-left p-5 bg-amber-500 text-slate-900 rounded-2xl shadow-sm hover:shadow-md border border-amber-400 transition-all flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-slate-900 text-amber-400 rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-pen-to-square text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-lg">Portal Ulangan Bab</h3>
+                            <p class="text-xs text-slate-800 opacity-90 mt-1">15 PG + 5 B/S + 5 Uraian (Anti-Contek)</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-lock text-slate-800 group-hover:scale-110 transition-transform"></i>
+                </button>
+            </div>
+
+            <!-- Quick Summary Infographic Cards -->
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-timeline text-red-600"></i> Timeline Singkat Kelahiran Pancasila
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <p class="text-xs font-bold text-red-700">1 Juni 1945</p>
+                        <p class="text-xs font-medium text-slate-700 mt-1">Gagasan Pidato Sukarno</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <p class="text-xs font-bold text-red-700">22 Juni 1945</p>
+                        <p class="text-xs font-medium text-slate-700 mt-1">Piagam Jakarta (Panitia 9)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <p class="text-xs font-bold text-red-700">18 Agustus 1945</p>
+                        <p class="text-xs font-medium text-slate-700 mt-1">Penetapan Resmi oleh PPKI</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: LEARNING MATERIAL (MATERI) -->
+        <section id="screen-materi" class="hidden space-y-5">
+            <!-- Back Button Header -->
+            <div class="flex items-center justify-between">
+                <button onclick="switchScreen('screen-dashboard')" class="text-sm font-semibold text-slate-600 hover:text-red-700 flex items-center gap-2 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-sm">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Menu
+                </button>
+                <span class="text-xs font-bold bg-red-100 text-red-800 px-3 py-1 rounded-full">Mode Belajar Mandiri</span>
+            </div>
+
+            <!-- Tab Navigation for Modules -->
+            <div class="flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
+                <button onclick="showModule(1)" id="tab-mod-1" class="mod-tab px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors bg-red-700 text-white shadow-sm">
+                    1. Kedatangan Jepang & BPUPK
+                </button>
+                <button onclick="showModule(2)" id="tab-mod-2" class="mod-tab px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                    2. Sidang BPUPK & 1 Juni 1945
+                </button>
+                <button onclick="showModule(3)" id="tab-mod-3" class="mod-tab px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                    3. Panitia Sembilan & Piagam Jakarta
+                </button>
+                <button onclick="showModule(4)" id="tab-mod-4" class="mod-tab px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">
+                    4. PPKI & Proklamasi 1945
+                </button>
+            </div>
+
+            <!-- MODULE 1 CONTENT -->
+            <div id="module-1" class="mod-content bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="border-b pb-3 border-slate-100">
+                    <h3 class="text-lg font-bold text-red-800 flex items-center gap-2">
+                        <i class="fa-solid fa-flag text-amber-500"></i> Sub-Bab 1: Kedatangan Jepang & Pembentukan BPUPK
+                    </h3>
+                </div>
+                <div class="prose prose-slate text-sm leading-relaxed space-y-3">
+                    <p class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg text-amber-900 text-xs">
+                        <strong>Latar Belakang:</strong> Kekuasaan kolonial Belanda di Indonesia berakhir setelah menyerah tanpa syarat kepada Jepang di Kalijati, Subang pada 8 Maret 1942.
+                    </p>
+                    <h4 class="font-bold text-slate-800">1. Alasan Jepang Menguasai Indonesia</h4>
+                    <p>Jepang melakukan ekspansi militer dalam Perang Pasifik (Perang Asia Timur Raya) yang dipicu serangan terhadap pangkalan militer AS di Pearl Harbour (7/8 Desember 1941). Indonesia sangat vital bagi Jepang karena kaya akan minyak bumi dan sumber daya alam untuk menyokong mesin perang mereka.</p>
+                    <h4 class="font-bold text-slate-800">2. Propaganda "Saudara Tua"</h4>
+                    <p>Jepang menarik simpati dengan propaganda Gerakan 3A: <em>Nippon Cahaya Asia, Nippon Pelindung Asia, Nippon Pemimpin Asia</em>. Namun, dalam praktiknya pemerintahan pendudukan Jepang sangat kejam dan menyengsarakan rakyat.</p>
+                    <h4 class="font-bold text-slate-800">3. Pembentukan BPUPK</h4>
+                    <p>Ketika kedudukan Jepang terdesak oleh Sekutu, Jepang memberikan janji kemerdekaan (7 September 1944). Sebagai bukti janji, dibentuklah <strong>BPUPK</strong> (<em>Dokuritsu Zyunbi Tyoosakai</em>):</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <li><strong>Diumumkan:</strong> 1 Maret 1945</li>
+                        <li><strong>Resmi Dibentuk & Dilantik:</strong> 29 April 1945</li>
+                        <li><strong>Ketua:</strong> dr. K.R.T. Radjiman Wedyodiningrat</li>
+                        <li><strong>Wakil Ketua:</strong> R.P. Soeroso (Indonesia) & Ichibangase Yosio (Jepang)</li>
+                        <li><strong>Anggota awal:</strong> 60 Anggota Indonesia + 7/8 wakil Jepang (pengamat).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MODULE 2 CONTENT -->
+            <div id="module-2" class="mod-content hidden bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="border-b pb-3 border-slate-100">
+                    <h3 class="text-lg font-bold text-red-800 flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-amber-500"></i> Sub-Bab 2: Sidang BPUPK & Pidato 1 Juni 1945
+                    </h3>
+                </div>
+                <div class="prose prose-slate text-sm leading-relaxed space-y-3">
+                    <h4 class="font-bold text-slate-800">1. Sidang Pertama BPUPK (29 Mei – 1 Juni 1945)</h4>
+                    <p>Dilaksanakan di Gedung <em>Chuo Sangi In</em> (sekarang Gedung Pancasila, Jakarta). Ketua BPUPK mengajukan pertanyaan mendasar: <em>"Apa yang akan menjadi dasar negara Indonesia setelah merdeka?"</em></p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-3">
+                        <div class="p-3 bg-red-50 rounded-xl border border-red-100">
+                            <p class="font-bold text-red-800 text-xs">Mr. Mohammad Yamin (29 Mei)</p>
+                            <p class="text-xs text-slate-600 mt-1">Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, Kesejahteraan Rakyat.</p>
+                        </div>
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-100">
+                            <p class="font-bold text-amber-800 text-xs">Prof. Dr. Soepomo (31 Mei)</p>
+                            <p class="text-xs text-slate-600 mt-1">Persatuan, Kekeluargaan, Keseimbangan Lahir Batin, Musyawarah, Keadilan Rakyat.</p>
+                        </div>
+                        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+                            <p class="font-bold text-emerald-800 text-xs">Ir. Sukarno (1 Juni)</p>
+                            <p class="text-xs text-slate-600 mt-1">Kebangsaan, Internasionalisme/Kemanusiaan, Mufakat/Demokrasi, Kesejahteraan Sosial, Ketuhanan.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="font-bold text-slate-800">2. Momentum 1 Juni 1945 (Hari Lahir Pancasila)</h4>
+                    <p>Ir. Sukarno mengusulkan 5 prinsip tersebut diberi nama <strong>Pancasila</strong> (<em>Panca</em> = lima, <em>Sila</em> = asas/dasar). Gagasan ini berhasil menjawab tantangan ketua BPUPK dan menyatukan arah pembahasan dasar negara.</p>
+                </div>
+            </div>
+
+            <!-- MODULE 3 CONTENT -->
+            <div id="module-3" class="mod-content hidden bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="border-b pb-3 border-slate-100">
+                    <h3 class="text-lg font-bold text-red-800 flex items-center gap-2">
+                        <i class="fa-solid fa-file-signature text-amber-500"></i> Sub-Bab 3: Panitia Sembilan & Piagam Jakarta
+                    </h3>
+                </div>
+                <div class="prose prose-slate text-sm leading-relaxed space-y-3">
+                    <h4 class="font-bold text-slate-800">1. Pembentukan Panitia Sembilan</h4>
+                    <p>Untuk menyempurnakan usulan dan menjembatani perbedaan pemikiran (terutama antara golongan kebangsaan dan Islam), Sukarno membentuk <strong>Panitia Sembilan</strong> yang diketuai oleh Ir. Sukarno.</p>
+                    
+                    <h4 class="font-bold text-slate-800">2. Piagam Jakarta (Jakarta Charter) - 22 Juni 1945</h4>
+                    <p>Pada 22 Juni 1945, Panitia Sembilan berhasil menyepakati naskah rancangan Pembukaan UUD yang disebut <strong>Piagam Jakarta</strong> (oleh Mohammad Yamin) atau <em>Mukadimah</em> (oleh Sukarno).</p>
+                    
+                    <div class="p-3 bg-slate-100 rounded-xl border border-slate-200 text-xs space-y-1">
+                        <p class="font-bold text-slate-800">Sila Pertama dalam Piagam Jakarta:</p>
+                        <p class="italic font-medium text-red-700">"Ketuhanan, dengan kewajiban menjalankan syari'at Islam bagi pemeluk-pemeluknya."</p>
+                    </div>
+
+                    <h4 class="font-bold text-slate-800">3. Sidang Kedua BPUPK (10 – 17 Juli 1945)</h4>
+                    <p>Sidang kedua berfokus membahas rancangan Undang-Undang Dasar dan bentuk negara. BPUPK selesai bertugas pada 17 Juli 1945.</p>
+                </div>
+            </div>
+
+            <!-- MODULE 4 CONTENT -->
+            <div id="module-4" class="mod-content hidden bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="border-b pb-3 border-slate-100">
+                    <h3 class="text-lg font-bold text-red-800 flex items-center gap-2">
+                        <i class="fa-solid fa-scroll text-amber-500"></i> Sub-Bab 4: PPKI, Proklamasi & Pengesahan Pancasila
+                    </h3>
+                </div>
+                <div class="prose prose-slate text-sm leading-relaxed space-y-3">
+                    <h4 class="font-bold text-slate-800">1. PPKI (Dokuritsu Zyunbi Inkai)</h4>
+                    <p>Dibentuk 7 Agustus 1945 dengan 21 anggota (ditambah 6 anggota Indonesia tanpa sepengetahuan Jepang, total 27 anggota). Ketua: Ir. Sukarno, Wakil: Drs. Mohammad Hatta.</p>
+
+                    <h4 class="font-bold text-slate-800">2. Detik-Detik Proklamasi (17 Agustus 1945)</h4>
+                    <p>Setelah Bom Atom Hiroshima (6 Agt) & Nagasaki (9 Agt), Jepang menyerah pada 15 Agustus 1945. Peristiwa Rengasdengklok (16 Agt) terjadi akibat desakan pemuda. Proklamasi dibacakan pada 17 Agustus 1945 pukul 10.00 WIB di Pegangsaan Timur 56 Jakarta.</p>
+
+                    <h4 class="font-bold text-slate-800">3. Sidang PPKI 18 Agustus 1945 (Penetapan Resmi)</h4>
+                    <p>Demi menjaga persatuan nasional, Mohammad Hatta memimpin konsolidasi untuk mengubah sila pertama Piagam Jakarta menjadi: <strong>"Ketuhanan Yang Maha Esa"</strong>.</p>
+                    <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs">
+                        <p class="font-bold text-emerald-900 mb-1">Keputusan Utama Sidang PPKI (18 Agustus 1945):</p>
+                        <ol class="list-decimal pl-4 space-y-0.5 text-slate-700">
+                            <li>Mengesahkan UUD 1945 (termasuk Pancasila di Pembukaan).</li>
+                            <li>Memilih Ir. Sukarno (Presiden) & Drs. Mohammad Hatta (Wapres).</li>
+                            <li>Membentuk Komite Nasional Indonesia Pusat (KNIP).</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: EXAM PORTAL REGISTRATION & INTEGRITY RULES -->
+        <section id="screen-portal-ulangan" class="hidden space-y-5">
+            <div class="flex items-center justify-between">
+                <button onclick="switchScreen('screen-dashboard')" class="text-sm font-semibold text-slate-600 hover:text-red-700 flex items-center gap-2 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-sm">
+                    <i class="fa-solid fa-arrow-left"></i> Batal / Kembali
+                </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-lg space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 bg-red-100 text-red-700 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h2 class="text-xl font-extrabold text-slate-800">Portal Ulangan Bab Interaktif</h2>
+                    <p class="text-xs text-slate-500">Materi: Sejarah Kelahiran Pancasila (Paket B)</p>
+                </div>
+
+                <!-- Anti-Cheating System Warning Banner -->
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl space-y-2">
+                    <div class="flex items-center gap-2 text-amber-800 font-bold text-xs">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 text-sm"></i>
+                        <span>PERATURAN INTEGRITAS ANTI-CONTEK:</span>
+                    </div>
+                    <ul class="text-xs text-amber-900 space-y-1 list-disc pl-4">
+                        <li>Sistem akan memaksa tampilan <strong>Layar Penuh (Full-screen)</strong>.</li>
+                        <li>Dilarang berpindah tab, membuka aplikasi lain, atau meminimalkan layar.</li>
+                        <li><strong>Toleransi Maksimal: 3x Peringatan.</strong> Pada pelanggaran ke-3, ujian akan otomatis dihentikan dan jawaban langsung dikirim secara permanen.</li>
+                    </ul>
+                </div>
+
+                <!-- Student Registration Form -->
+                <form id="form-registrasi" onsubmit="startExam(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Peserta Didik *</label>
+                        <input type="text" id="reg-nama" required placeholder="Ketik nama lengkap Anda..." class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-red-600 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Pilih Tingkat Kelas *</label>
+                        <select id="reg-kelas" required class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-red-600 focus:outline-none bg-white">
+                            <option value="">-- Pilih Kelas --</option>
+                            <option value="Kelas 7">Kelas 7 (Paket B)</option>
+                            <option value="Kelas 8">Kelas 8 (Paket B)</option>
+                            <option value="Kelas 9">Kelas 9 (Paket B)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-red-700 hover:bg-red-800 text-white font-bold rounded-xl text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> Mulai Ujian Sekarang
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- SCREEN 4: ACTIVE EXAM ENGINE (ONE QUESTION AT A TIME) -->
+        <section id="screen-ujian" class="hidden space-y-4">
+            <!-- Top Exam Bar: Timer & Violation Counter -->
+            <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center text-xs">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-red-100 text-red-700 rounded-lg flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <div>
+                        <p class="text-slate-400 font-medium">Waktu Berjalan</p>
+                        <p id="exam-timer" class="font-mono font-bold text-slate-800 text-sm">00:00</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <div class="text-right">
+                        <p class="text-slate-400 font-medium">Pelanggaran (Max 3)</p>
+                        <p id="violation-count" class="font-bold text-emerald-600 text-sm">0 / 3</p>
+                    </div>
+                    <div class="w-8 h-8 bg-amber-100 text-amber-700 rounded-lg flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="bg-slate-200 h-2.5 w-full rounded-full overflow-hidden">
+                <div id="exam-progress" class="bg-red-700 h-full w-0 transition-all duration-300"></div>
+            </div>
+
+            <!-- Question Card Container -->
+            <div class="bg-white p-5 md:p-6 rounded-3xl border border-slate-200 shadow-md space-y-5">
+                <div class="flex justify-between items-center border-b pb-3 border-slate-100">
+                    <span id="question-type-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700">
+                        Pilihan Ganda
+                    </span>
+                    <span id="question-number-badge" class="text-xs font-bold text-slate-500">
+                        Soal 1 dari 25
+                    </span>
+                </div>
+
+                <!-- Question Text -->
+                <div id="question-text" class="text-slate-800 font-semibold text-sm md:text-base leading-relaxed">
+                    Loading soal...
+                </div>
+
+                <!-- Guidance/Hint Note for Essays -->
+                <div id="essay-hint-box" class="hidden p-3 bg-blue-50 border border-blue-200 rounded-xl text-xs text-blue-900 space-y-1">
+                    <p class="font-bold flex items-center gap-1.5">
+                        <i class="fa-solid fa-lightbulb text-amber-500"></i> Panduan Cara Menjawab:
+                    </p>
+                    <p id="essay-hint-text">Gunakan kalimatmu sendiri secara ringkas namun jelas mencakup kata kunci utama.</p>
+                </div>
+
+                <!-- Answer Container (Dynamic Render: PG, B/S, or Essay) -->
+                <div id="answers-container" class="space-y-2.5 pt-2">
+                    <!-- Options populated via JS -->
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                    <button onclick="prevQuestion()" id="btn-prev-q" class="px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 disabled:opacity-40">
+                        <i class="fa-solid fa-chevron-left me-1"></i> Sebelum
+                    </button>
+                    <button onclick="nextQuestion()" id="btn-next-q" class="px-5 py-2.5 rounded-xl bg-red-700 hover:bg-red-800 text-white text-xs font-bold shadow-sm transition-colors">
+                        Berikut <i class="fa-solid fa-chevron-right ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 5: EXAM RESULT CARD -->
+        <section id="screen-hasil" class="hidden space-y-5">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xl text-center space-y-5">
+                <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto text-4xl shadow-inner">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div class="space-y-1">
+                    <h2 class="text-2xl font-extrabold text-slate-800">Hasil Ulangan Harian</h2>
+                    <p class="text-xs text-slate-500">Sejarah Kelahiran Pancasila - Paket B</p>
+                </div>
+
+                <!-- Score Badge Box -->
+                <div class="bg-slate-900 text-white rounded-2xl p-4 max-w-xs mx-auto space-y-1 border border-slate-800 shadow-md">
+                    <p class="text-xs text-slate-400">Total Nilai Akhir</p>
+                    <p id="result-score" class="text-5xl font-black text-amber-400">0</p>
+                    <p class="text-[10px] text-slate-400">Skala Maksimal: 100 Point</p>
+                </div>
+
+                <!-- Student Metadata Breakdown -->
+                <div class="grid grid-cols-2 gap-3 text-left text-xs bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <div>
+                        <p class="text-slate-400">Nama Siswa:</p>
+                        <p id="res-nama" class="font-bold text-slate-800">-</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400">Kelas:</p>
+                        <p id="res-kelas" class="font-bold text-slate-800">-</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400">Waktu Selesai:</p>
+                        <p id="res-timestamp" class="font-bold text-slate-800">-</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400">Durasi Pengerjaan:</p>
+                        <p id="res-duration" class="font-bold text-slate-800">-</p>
+                    </div>
+                </div>
+
+                <!-- Evaluative Wrong Question Numbers Box (Anti-Key Leak) -->
+                <div class="text-left bg-red-50 p-4 rounded-2xl border border-red-200 space-y-2">
+                    <p class="text-xs font-bold text-red-900 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-exclamation text-red-600"></i> Evaluasi Nomor Soal yang Salah:
+                    </p>
+                    <p id="wrong-questions-list" class="text-xs font-mono font-bold text-red-700">
+                        Tidak ada / Sempurna!
+                    </p>
+                    <p class="text-[11px] text-red-800 italic">
+                        *Catatan: Sesuai aturan ujian, kunci jawaban resmi tidak ditampilkan agar peserta didik kembali membaca materi pembelajaran.
+                    </p>
+                </div>
+
+                <!-- Screenshot Instructions -->
+                <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-left space-y-2">
+                    <div class="flex items-center gap-2 text-emerald-900 font-bold text-xs">
+                        <i class="fa-solid fa-camera text-emerald-600 text-lg"></i>
+                        <span>PETUNJUK PENGIRIMAN HASIL ULANGAN:</span>
+                    </div>
+                    <ol class="text-xs text-emerald-900 list-decimal pl-4 space-y-1.5 leading-relaxed">
+                        <li>Ambil gambar / <strong>Screenshot (Tangkapan Layar)</strong> seluruh halaman hasil nilai ini.</li>
+                        <li>Kirimkan foto hasil <strong>Screenshot</strong> tersebut ke <strong>WhatsApp Guru</strong> Anda sebagai bukti telah menyelesaikan ulangan.</li>
+                    </ol>
+                </div>
+
+                <button onclick="switchScreen('screen-dashboard')" class="w-full py-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded-xl text-xs transition-colors">
+                    Kembali ke Menu Utama
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-3 px-4 text-center text-xs text-slate-500">
+        <p>© Modul Pembelajaran & Ulangan Pendidikan Pancasila Paket B Setara SMP</p>
+    </footer>
+
+    <!-- Anti-Cheating Violation Warning Modal Overlay -->
+    <div id="modal-violation" class="hidden fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-custom flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 max-w-sm w-full text-center space-y-4 shadow-2xl border-2 border-red-500">
+            <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto text-3xl font-bold animate-pulse">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-800">PERINGATAN INTEGRITAS!</h3>
+            <p id="violation-modal-text" class="text-xs text-slate-600 leading-relaxed">
+                Anda terdeteksi meninggalkan layar portal ulangan atau berpindah aplikasi!
+            </p>
+            <div class="p-3 bg-red-50 rounded-xl border border-red-100">
+                <p class="text-xs font-bold text-red-800">
+                    Pelanggaran Ke: <span id="modal-viol-count" class="text-base text-red-600">1</span> / 3
+                </p>
+            </div>
+            <button onclick="closeViolationModal()" class="w-full py-3 bg-red-700 hover:bg-red-800 text-white font-bold rounded-xl text-xs shadow-md transition-all">
+                Saya Mengerti & Lanjutkan Ujian
+            </button>
+        </div>
+    </div>
+
+    <!-- SCRIPT APPLICATION LOGIC -->
+    <script>
+        /* ----------------------------------------------------
+           1. QUESTION BANK DATA (25 CRITICAL THINKING QUESTIONS)
+           - 15 Multiple Choice (PG)
+           - 5 True/False (B/S)
+           - 5 Critical Thinking Essay (Uraian)
+        ---------------------------------------------------- */
+        const questionsData = [
+            // --- 15 PILIHAN GANDA (PG) ---
+            {
+                id: 1,
+                type: "PG",
+                question: "Meskipun Jepang mempropagandakan dirinya sebagai 'Saudara Tua' yang membebaskan Asia dari penjajahan Barat melalui Gerakan Tiga A, tujuan utama Jepang menguasai Indonesia sebenarnya adalah...",
+                options: [
+                    "A. Mengembangkan sistem pendidikan modern di kawasan Asia",
+                    "B. Memanfaatkan sumber daya alam minyak bumi untuk perang Sekutu",
+                    "C. Menguasai kekayaan alam dan tenaga manusia guna menyokong perang Pasifik Jepang",
+                    "D. Membantu rakyat Indonesia mendirikan pemerintahan berdaulat penuh"
+                ],
+                answer: 2 // C
+            },
+            {
+                id: 2,
+                type: "PG",
+                question: "Peristiwa penyerangan pangkalan militer Pearl Harbour pada 7/8 Desember 1941 menjadi titik balik penting karena...",
+                options: [
+                    "A. Menandai dimulainya perlawanan gerilya bangsa Indonesia",
+                    "B. Memicu Perang Pasifik yang memindahkan kekuasaan penjajahan dari Belanda ke Jepang",
+                    "C. Menyebabkan Jepang secara sukarela memberikan kemerdekaan pada Indonesia",
+                    "D. Memaksa BPUPK menggelar sidang darurat di Hawaii"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 3,
+                type: "PG",
+                question: "Jepang akhirnya berjanji memberikan kemerdekaan kepada Indonesia pada September 1944. Faktor utama di balik keputusan Jepang tersebut adalah...",
+                options: [
+                    "A. Posisi militer Jepang yang semakin terdesak oleh serangan balik pasukan Sekutu",
+                    "B. Kemenangan besar pasukan Jepang di seluruh front Perang Pasifik",
+                    "C. Pelaksanaan hasil sidang pertama BPUPK di Kalijati Subang",
+                    "D. Rasa iba pemerintah Jepang terhadap penderitaan rakyat Indonesia"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 4,
+                type: "PG",
+                question: "Ketua BPUPK dr. K.R.T. Radjiman Wedyodiningrat membuka sidang pertama dengan pertanyaan kunci tentang dasar negara. Mengapa pertanyaan dasar negara ini sangat vital bagi Indonesia merdeka?",
+                options: [
+                    "A. Karena dasar negara diperlukan sebagai syarat administrasi penyerahan kekuasaan dari Jepang",
+                    "B. Karena dasar negara menjadi fondasi utama dalam menyelenggarakan pemerintahan dan mempersatukan bangsa",
+                    "C. Agar Indonesia diizinkan membentuk tentara profesional oleh Sekutu",
+                    "D. Untuk membalas jasa militer Jepang yang telah mengalahkan Belanda"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 5,
+                type: "PG",
+                question: "Tanggal 29 April 1945 dicatat dalam sejarah perumusan Pancasila sebagai momentum...",
+                options: [
+                    "A. Pembacaan teks Proklamasi Kemerdekaan Indonesia",
+                    "B. Perumusan awal Piagam Jakarta oleh Panitia Sembilan",
+                    "C. Pelantikan dan pembentukan resmi pengurus BPUPK",
+                    "D. Pidato pertama Ir. Sukarno tentang nama Pancasila"
+                ],
+                answer: 2 // C
+            },
+            {
+                id: 6,
+                type: "PG",
+                question: "Dalam pidato 1 Juni 1945, Ir. Sukarno menyampaikan prinsip 'Internasionalisme atau Peri Kemanusiaan'. Makna kritis dari prinsip ini dalam konteks berbangsa adalah...",
+                options: [
+                    "A. Bangsa Indonesia harus mengagungkan bangsa luar di atas bangsa sendiri",
+                    "B. Kebangsaan Indonesia tidak boleh tertutup (chauvinistis), melainkan harus menjunjung harkat martabat manusia secara global",
+                    "C. Menghapus batas-batas wilayah Indonesia agar bergabung dengan negara Sekutu",
+                    "D. Mengutamakan perdagangan internasional daripada persatuan dalam negeri"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 7,
+                type: "PG",
+                question: "Mengapa tanggal 1 Juni diperingati secara nasional sebagai Hari Lahir Pancasila?",
+                options: [
+                    "A. Karena pada tanggal tersebut UUD 1945 disahkan secara hukum oleh PPKI",
+                    "B. Karena Sukarno memperkenal konsep dasar negara yang diberi nama Pancasila dalam sidang BPUPK",
+                    "C. Karena Panitia Sembilan berhasil menandatangani Piagam Jakarta",
+                    "D. Karena Jepang menyerah tanpa syarat kepada pihak Sekutu"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 8,
+                type: "PG",
+                question: "Perbedaan utama antara susunan Panitia Delapan dan Panitia Sembilan terletak pada...",
+                options: [
+                    "A. Panitia Sembilan dibentuk khusus oleh militer Jepang tanpa melibatkan Sukarno",
+                    "B. Panitia Sembilan merangkum wakil dari golongan kebangsaan dan golongan Islam secara seimbang",
+                    "C. Panitia Delapan bertugas mengesahkan Undang-Undang Dasar",
+                    "D. Panitia Sembilan tidak diakui dalam sejarah perjuangan kemerdekaan"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 9,
+                type: "PG",
+                question: "Naskah Piagam Jakarta (Jakarta Charter) tanggal 22 Juni 1945 memiliki arti penting dalam sejarah perumusan dasar negara karena...",
+                options: [
+                    "A. Merupakan dokumen hukum pertama yang menggantikan kekuasaan Sekutu di Jakarta",
+                    "B. Menjadi rancangan tertulis Pembukaan UUD yang memuat rumusan kompromi Pancasila",
+                    "C. Menandai dibubarkannya PPKI oleh Jenderal Hisaichi Terauchi",
+                    "D. Berisi pengumuman pengangkatan Sukarno menjadi Presiden RI"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 10,
+                type: "PG",
+                question: "Mengapa usul persidangan BPUPK dan PPKI dianggap sebagai bukti kecerdasan diplomasi para tokoh pendiri bangsa?",
+                options: [
+                    "A. Karena para tokoh pendiri bangsa mampu memanfaatkan wadah bentukan Jepang untuk kepentingan kemerdekaan Indonesia sendiri",
+                    "B. Karena pendiri bangsa sepenuhnya menuruti semua instruksi militer Jepang",
+                    "C. Karena sidang-sidang tersebut membiayai seluruh kebutuhan perang Jepang",
+                    "D. Karena pendiri bangsa menolak bekerja sama dengan warga Indonesia dari daerah lain"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 11,
+                type: "PG",
+                question: "Sikap keteladanan tertinggi yang ditunjukkan Mohammad Hatta dan tokoh-tokoh Islam saat mengubah rumusan sila pertama Piagam Jakarta pada 18 Agustus 1945 adalah...",
+                options: [
+                    "A. Mengalah karena mendapat ancaman dari militer Sekutu",
+                    "B. Menjunjung tinggi jiwa besar, rasa toleransi, dan mengutamakan persatuan kebangsaan di atas kepentingan kelompok",
+                    "C. Menyerahkan keputusan sepenuhnya kepada janji kemerdekaan Jepang",
+                    "D. Membatalkan hasil musyawarah yang telah disepakati Panitia Sembilan"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 12,
+                type: "PG",
+                question: "Peristiwa Rengasdengklok pada 16 Agustus 1945 terjadi akibat adanya perbedaan pandangan antara golongan muda dan golongan tua mengenai...",
+                options: [
+                    "A. Rumusan sila-sila dalam Piagam Jakarta",
+                    "B. Waktu dan cara pelaksanaan Proklamasi Kemerdekaan agar bebas dari pengaruh Jepang",
+                    "C. Siapa yang berhak diangkat menjadi ketua PPKI",
+                    "D. Tempat pelaksanaan sidang pengesahan UUD 1945"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 13,
+                type: "PG",
+                question: "Hasil sidang PPKI pada tanggal 18 Agustus 1945 secara sah menetapkan Pancasila sebagai dasar negara melalui pengesahan...",
+                options: [
+                    "A. Teks Proklamasi Kemerdekaan Indonesia",
+                    "B. Pembukaan dan Batang Tubuh Undang-Undang Dasar Negara Republik Indonesia Tahun 1945",
+                    "C. Piagam Perjanjian Kalijati Subang",
+                    "D. Dekrit Pembentukan Komite Nasional Indonesia Pusat"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 14,
+                type: "PG",
+                question: "Hubungan yang tepat antara Proklamasi 17 Agustus 1945 dan Penetapan Pancasila 18 Agustus 1945 adalah...",
+                options: [
+                    "A. Proklamasi adalah pernyataan kemerdekaan, sedangkan penetapan Pancasila landasan hukum berdiri bernegaranya",
+                    "B. Proklamasi membatalkan semua keputusan sidang BPUPK dan Panitia Sembilan",
+                    "C. Pancasila sudah berlaku secara sah sebelum Proklamasi dibacakan Sukarno",
+                    "D. Penetapan Pancasila dilakukan oleh militer Sekutu setelah Proklamasi"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 15,
+                type: "PG",
+                question: "Urutan peristiwa kronologis perumusan Pancasila sebagai satu kesatuan proses sejarah yang utuh adalah...",
+                options: [
+                    "A. Piagam Jakarta (22 Juni) -> Pidato 1 Juni -> Pengesahan PPKI (18 Agustus)",
+                    "B. Pidato 1 Juni -> Piagam Jakarta (22 Juni) -> Pengesahan PPKI (18 Agustus)",
+                    "C. Pengesahan PPKI (18 Agustus) -> Pidato 1 Juni -> Piagam Jakarta (22 Juni)",
+                    "D. Sidang Kedua BPUPK -> Pidato 1 Juni -> Peristiwa Rengasdengklok"
+                ],
+                answer: 1 // B
+            },
+
+            // --- 5 BENAR / SALAH (B/S) ---
+            {
+                id: 16,
+                type: "BS",
+                question: "Pernyataan: Jepang membentuk BPUPK murni karena rasa cinta dan keinginan tulus membantu bangsa Indonesia menjadi negara adidaya.",
+                options: ["Benar", "Salah"],
+                answer: 1 // Salah (Jepang terdesak perang & butuh dukungan)
+            },
+            {
+                id: 17,
+                type: "BS",
+                question: "Pernyataan: Gagasan dasar negara yang disampaikan Ir. Sukarno pada 1 Juni 1945 langsung memuat rumusan teks Pancasila yang persis sama dengan yang berlaku hari ini.",
+                options: ["Benar", "Salah"],
+                answer: 1 // Salah (Gagasan 1 Juni mengalami penyempurnaan di Piagam Jakarta & PPKI)
+            },
+            {
+                id: 18,
+                type: "BS",
+                question: "Pernyataan: Panitia Sembilan dibentuk untuk menjembatani perbedaan pendapat dan menyusun rancangan Pembukaan UUD.",
+                options: ["Benar", "Salah"],
+                answer: 0 // Benar
+            },
+            {
+                id: 19,
+                type: "BS",
+                question: "Pernyataan: Tokoh-tokoh bangsa bersedia mengubah kalimat sila pertama Piagam Jakarta menjadi 'Ketuhanan Yang Maha Esa' demi menjaga keutuhan dan persatuan bangsa Indonesia.",
+                options: ["Benar", "Salah"],
+                answer: 0 // Benar
+            },
+            {
+                id: 20,
+                type: "BS",
+                question: "Pernyataan: PPKI mengubah jumlah anggotanya dengan menambah 6 orang Indonesia tanpa sepengetahuan pihak Jepang untuk menunjukkan bahwa PPKI bekerja secara mandiri.",
+                options: ["Benar", "Salah"],
+                answer: 0 // Benar
+            },
+
+            // --- 5 URAIAN (CRITICAL THINKING ESSAY) ---
+            {
+                id: 21,
+                type: "ESSAY",
+                question: "Jelaskan rantai hubungan (sebab-akibat) antara peristiwa terdesaknya militer Jepang dalam Perang Pasifik dengan lahirnya gagasan Pancasila dalam sidang BPUPK!",
+                hint: "Sebutkan bagaimana posisi Jepang terdesak membuat mereka butuh dukungan rakyat Indonesia -> memberikan janji kemerdekaan -> membentuk BPUPK -> sidang BPUPK membahas dasar negara.",
+                keywords: ["terdesak", "dukungan", "janji", "bpupk", "sidang", "dasar negara"]
+            },
+            {
+                id: 22,
+                type: "ESSAY",
+                question: "Mengapa pertanyaan dr. K.R.T. Radjiman Wedyodiningrat di awal sidang BPUPK tentang 'dasar negara' sangat penting bagi sebuah bangsa yang baru akan merdeka?",
+                hint: "Uraikan peran dasar negara sebagai fondasi, pedoman hidup bersama, penyatu keberagaman, dan pengatur pemerintahan.",
+                keywords: ["fondasi", "pedoman", "persatuan", "fondasi negara", "pemerintahan", "landasan"]
+            },
+            {
+                id: 23,
+                type: "ESSAY",
+                question: "Analisis alasan penting di balik pembentukan Panitia Sembilan setelah sidang pertama BPUPK selesai!",
+                hint: "Jelaskan perlunya panitia kecil untuk mengolah berbagai usulan dan menjembatani kompromi antara golongan kebangsaan dan Islam.",
+                keywords: ["usulan", "kompromi", "kebangsaan", "islam", "pembukaan uud", "menyeleraskan"]
+            },
+            {
+                id: 24,
+                type: "ESSAY",
+                question: "Nilai keteladanan Pancasila apa yang dapat kita pelajari dari sikap para pendiri bangsa saat menyepakati perubahan sila pertama Piagam Jakarta pada 18 Agustus 1945?",
+                hint: "Sebutkan nilai-nilai seperti jiwa besar, toleransi, musyawarah, dan mengutamakan kepentingan persatuan bangsa di atas golongan.",
+                keywords: ["toleransi", "persatuan", "jiwa besar", "musyawarah", "kepentingan bersama"]
+            },
+            {
+                id: 25,
+                type: "ESSAY",
+                question: "Mengapa tanggal 1 Juni 1945, 22 Juni 1945, dan 18 Agustus 1945 harus dipandang sebagai SATU KESATUAN proses sejarah kelahiran Pancasila?",
+                hint: "Jelaskan bahwa 1 Juni adalah gagasan awal, 22 Juni adalah perumusan tertulis, dan 18 Agustus adalah pengesahan final.",
+                keywords: ["gagasan", "perumusan", "pengesahan", "kesatuan", "proses", "berkesinambungan"]
+            }
+        ];
+
+        /* ----------------------------------------------------
+           2. STATE MANAGEMENT & GLOBALS
+        ---------------------------------------------------- */
+        let studentData = { nama: "", kelas: "" };
+        let currentQuestionIdx = 0;
+        let studentAnswers = {}; // { qId: answerIndex or stringText }
+        let examTimerInterval = null;
+        let examSeconds = 0;
+        let violationCount = 0;
+        let isExamActive = false;
+
+        /* ----------------------------------------------------
+           3. UI SCREEN SWITCHING & MODULE NAVIGATION
+        ---------------------------------------------------- */
+        function switchScreen(screenId) {
+            document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+
+            const navBadge = document.getElementById('nav-status');
+            if (screenId === 'screen-ujian') {
+                navBadge.className = 'flex items-center gap-2 bg-amber-500 text-slate-900 text-xs px-3 py-1.5 rounded-full font-bold animate-pulse';
+                navBadge.innerHTML = `<i class="fa-solid fa-lock"></i><span>Mode Ujian Terkunci</span>`;
+            } else if (screenId === 'screen-materi') {
+                navBadge.className = 'flex items-center gap-2 bg-red-900/60 text-amber-200 text-xs px-3 py-1.5 rounded-full border border-red-700';
+                navBadge.innerHTML = `<i class="fa-solid fa-book-open"></i><span>Mode Belajar</span>`;
+            } else {
+                navBadge.className = 'hidden md:flex items-center gap-2 bg-red-900/60 text-xs px-3 py-1.5 rounded-full border border-red-700';
+                navBadge.innerHTML = `<i class="fa-solid fa-house"></i><span>Menu Utama</span>`;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showModule(modNum) {
+            document.querySelectorAll('.mod-tab').forEach((tab, idx) => {
+                if (idx === modNum - 1) {
+                    tab.className = "mod-tab px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors bg-red-700 text-white shadow-sm";
+                } else {
+                    tab.className = "mod-tab px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors bg-white text-slate-600 border border-slate-200 hover:bg-slate-100";
+                }
+            });
+
+            document.querySelectorAll('.mod-content').forEach((mod, idx) => {
+                if (idx === modNum - 1) {
+                    mod.classList.remove('hidden');
+                } else {
+                    mod.classList.add('hidden');
+                }
+            });
+        }
+
+        /* ----------------------------------------------------
+           4. ANTI-CHEATING SECURITY SYSTEM & FULLSCREEN CONTROL
+        ---------------------------------------------------- */
+        function requestFullScreen() {
+            const docElm = document.documentElement;
+            if (docElm.requestFullscreen) {
+                docElm.requestFullscreen().catch(() => {});
+            } else if (docElm.webkitRequestFullscreen) {
+                docElm.webkitRequestFullscreen();
+            } else if (docElm.msRequestFullscreen) {
+                docElm.msRequestFullscreen();
+            }
+        }
+
+        function triggerViolation(reason) {
+            if (!isExamActive) return;
+
+            violationCount++;
+            document.getElementById('violation-count').innerText = `${violationCount} / 3`;
+            document.getElementById('modal-viol-count').innerText = violationCount;
+
+            if (violationCount >= 3) {
+                // Auto Force Submit on 3rd Violation
+                closeViolationModal();
+                alert("Batas maksimal pelanggaran (3x) telah tercapai! Ujian Anda dihentikan secara otomatis oleh sistem anti-contek.");
+                finishExam();
+            } else {
+                document.getElementById('violation-modal-text').innerText = `${reason}. Mengalihkan perhatian dari soal ujian dapat mengurangi kejujuran hasil pengerjaan.`;
+                document.getElementById('modal-violation').classList.remove('hidden');
+            }
+        }
+
+        function closeViolationModal() {
+            document.getElementById('modal-violation').classList.add('hidden');
+            requestFullScreen();
+        }
+
+        // Event Listeners for Anti-Cheating Tracking
+        window.addEventListener('blur', () => {
+            if (isExamActive) triggerViolation("Anda terdeteksi berpindah tab atau aplikasi");
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (isExamActive && document.hidden) {
+                triggerViolation("Anda terdeteksi meminimalkan halaman ujian");
+            }
+        });
+
+        /* ----------------------------------------------------
+           5. EXAM ENGINE LOGIC
+        ---------------------------------------------------- */
+        function startExam(e) {
+            e.preventDefault();
+            const namaInput = document.getElementById('reg-nama').value.trim();
+            const kelasInput = document.getElementById('reg-kelas').value;
+
+            if (!namaInput || !kelasInput) {
+                alert("Harap isi Nama dan pilih Kelas terlebih dahulu!");
+                return;
+            }
+
+            studentData.nama = namaInput;
+            studentData.kelas = kelasInput;
+            studentAnswers = {};
+            currentQuestionIdx = 0;
+            violationCount = 0;
+            examSeconds = 0;
+            isExamActive = true;
+
+            document.getElementById('violation-count').innerText = "0 / 3";
+            requestFullScreen();
+
+            // Start Timer
+            if (examTimerInterval) clearInterval(examTimerInterval);
+            examTimerInterval = setInterval(() => {
+                examSeconds++;
+                const mins = String(Math.floor(examSeconds / 60)).padStart(2, '0');
+                const secs = String(examSeconds % 60).padStart(2, '0');
+                document.getElementById('exam-timer').innerText = `${mins}:${secs}`;
+            }, 1000);
+
+            switchScreen('screen-ujian');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = questionsData[currentQuestionIdx];
+            const totalQ = questionsData.length;
+
+            // Update Progress Bar
+            const progressPct = ((currentQuestionIdx + 1) / totalQ) * 100;
+            document.getElementById('exam-progress').style.width = `${progressPct}%`;
+
+            // Update Badges
+            document.getElementById('question-number-badge').innerText = `Soal ${currentQuestionIdx + 1} dari ${totalQ}`;
+            const typeBadge = document.getElementById('question-type-badge');
+            const hintBox = document.getElementById('essay-hint-box');
+
+            if (q.type === 'PG') {
+                typeBadge.innerText = 'Pilihan Ganda (4 Poin)';
+                typeBadge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800';
+                hintBox.classList.add('hidden');
+            } else if (q.type === 'BS') {
+                typeBadge.innerText = 'Benar / Salah (3 Poin)';
+                typeBadge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800';
+                hintBox.classList.add('hidden');
+            } else {
+                typeBadge.innerText = 'Uraian Kritis (5 Poin)';
+                typeBadge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800';
+                document.getElementById('essay-hint-text').innerText = q.hint;
+                hintBox.classList.remove('hidden');
+            }
+
+            // Question Text
+            document.getElementById('question-text').innerText = q.question;
+
+            // Render Answer Inputs
+            const container = document.getElementById('answers-container');
+            container.innerHTML = '';
+
+            const currentAns = studentAnswers[q.id];
+
+            if (q.type === 'PG' || q.type === 'BS') {
+                q.options.forEach((opt, optIdx) => {
+                    const btn = document.createElement('button');
+                    const isSelected = currentAns === optIdx;
+                    btn.className = `w-full text-left p-3.5 rounded-xl border text-xs md:text-sm transition-all flex items-center justify-between ${
+                        isSelected 
+                        ? 'bg-red-50 border-red-600 text-red-900 font-bold shadow-sm ring-1 ring-red-600' 
+                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                    }`;
+                    btn.innerHTML = `
+                        <span>${opt}</span>
+                        <div class="w-5 h-5 rounded-full border flex items-center justify-center ${isSelected ? 'border-red-600 bg-red-600 text-white' : 'border-slate-300'}">
+                            ${isSelected ? '<i class="fa-solid fa-check text-[10px]"></i>' : ''}
+                        </div>
+                    `;
+                    btn.onclick = () => selectAnswer(q.id, optIdx);
+                    container.appendChild(btn);
+                });
+            } else if (q.type === 'ESSAY') {
+                const textarea = document.createElement('textarea');
+                textarea.rows = 4;
+                textarea.placeholder = "Ketik jawaban analisis kritismu di sini...";
+                textarea.className = "w-full p-3.5 rounded-xl border border-slate-300 text-xs md:text-sm focus:ring-2 focus:ring-red-600 focus:outline-none";
+                textarea.value = currentAns || '';
+                textarea.oninput = (e) => saveEssayAnswer(q.id, e.target.value);
+                container.appendChild(textarea);
+            }
+
+            // Update Navigation Buttons
+            document.getElementById('btn-prev-q').disabled = (currentQuestionIdx === 0);
+            const btnNext = document.getElementById('btn-next-q');
+            if (currentQuestionIdx === totalQ - 1) {
+                btnNext.innerHTML = `Selesai & Kirim <i class="fa-solid fa-paper-plane ms-1"></i>`;
+                btnNext.className = "px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition-colors";
+            } else {
+                btnNext.innerHTML = `Berikut <i class="fa-solid fa-chevron-right ms-1"></i>`;
+                btnNext.className = "px-5 py-2.5 rounded-xl bg-red-700 hover:bg-red-800 text-white text-xs font-bold shadow-sm transition-colors";
+            }
+        }
+
+        function selectAnswer(qId, optionIdx) {
+            studentAnswers[qId] = optionIdx;
+            renderQuestion();
+        }
+
+        function saveEssayAnswer(qId, textValue) {
+            studentAnswers[qId] = textValue;
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIdx > 0) {
+                currentQuestionIdx--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIdx < questionsData.length - 1) {
+                currentQuestionIdx++;
+                renderQuestion();
+            } else {
+                if (confirm("Apakah Anda yakin telah memeriksa seluruh jawaban dan ingin mengakhiri ujian?")) {
+                    finishExam();
+                }
+            }
+        }
+
+        /* ----------------------------------------------------
+           6. FAIR HIGH-TOLERANCE SCORING & RESULT DISPLAY
+        ---------------------------------------------------- */
+        function finishExam() {
+            isExamActive = false;
+            if (examTimerInterval) clearInterval(examTimerInterval);
+
+            if (document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
+            }
+
+            let totalScore = 0;
+            let wrongQNumbers = [];
+
+            questionsData.forEach(q => {
+                const userAns = studentAnswers[q.id];
+
+                if (q.type === 'PG') {
+                    if (userAns === q.answer) {
+                        totalScore += 4; // 15 x 4 = 60
+                    } else {
+                        wrongQNumbers.push(q.id);
+                    }
+                } else if (q.type === 'BS') {
+                    if (userAns === q.answer) {
+                        totalScore += 3; // 5 x 3 = 15
+                    } else {
+                        wrongQNumbers.push(q.id);
+                    }
+                } else if (q.type === 'ESSAY') {
+                    // High-tolerance Critical Thinking Essay Auto-Grader (Max 5 points each = 25)
+                    if (!userAns || userAns.trim().length < 5) {
+                        wrongQNumbers.push(q.id);
+                    } else {
+                        const cleanText = userAns.toLowerCase();
+                        let matchedKeywords = 0;
+                        q.keywords.forEach(kw => {
+                            if (cleanText.includes(kw.toLowerCase())) matchedKeywords++;
+                        });
+
+                        if (matchedKeywords >= 2 || cleanText.length > 35) {
+                            totalScore += 5; // Full credit
+                        } else if (matchedKeywords === 1 || cleanText.length > 15) {
+                            totalScore += 3; // Partial credit
+                        } else {
+                            totalScore += 1; // Minimal attempt credit
+                            wrongQNumbers.push(q.id);
+                        }
+                    }
+                }
+            });
+
+            // Format Metadata
+            const now = new Date();
+            const timeString = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) + ' - ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            const mins = Math.floor(examSeconds / 60);
+            const secs = examSeconds % 60;
+            const durationString = `${mins} Menit ${secs} Detik`;
+
+            // Populate Result Screen
+            document.getElementById('result-score').innerText = totalScore;
+            document.getElementById('res-nama').innerText = studentData.nama;
+            document.getElementById('res-kelas').innerText = studentData.kelas;
+            document.getElementById('res-timestamp').innerText = timeString;
+            document.getElementById('res-duration').innerText = durationString;
+
+            // Populate Evaluative Wrong Questions
+            const wrongBox = document.getElementById('wrong-questions-list');
+            if (wrongQNumbers.length === 0) {
+                wrongBox.innerText = "Selamat! Semua soal dijawab dengan benar sempurna.";
+                wrongBox.className = "text-xs font-bold text-emerald-700";
+            } else {
+                wrongBox.innerText = wrongQNumbers.map(n => `Soal No. ${n}`).join(', ');
+                wrongBox.className = "text-xs font-mono font-bold text-red-700";
+            }
+
+            switchScreen('screen-hasil');
+        }
+    </script>
+</body>
+</html>
